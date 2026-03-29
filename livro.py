@@ -1,3 +1,6 @@
+from rich import print
+from rich.panel import Panel
+
 class Livro:
     ListaLivro = []
 
@@ -12,19 +15,30 @@ class Livro:
         return f"Autor {self.autor}, Titulo {self.titulo} Genero {self.genero} Ano {self.ano}"
 
     def adicionar(self):
-        Livro.ListaLivro.append({"Nome":self.autor, "Titulo":self.titulo, "Genero":self.genero, "Ano":self.ano})
+        Livro.ListaLivro.append({"Autor":self.autor, "Titulo":self.titulo, "Genero":self.genero, "Ano":self.ano})
         return self.ListaLivro
 
     def listar_livros(self):
-        for livros in self.ListaLivro:
-            print(livros)
+        livros = [livro for livro in Livro.ListaLivro]
+        print(Panel(str(livros), title= "Livros"))
 
-    def editar(self):
-        pass
+    def editar(self, livro):
+
+        encontrado = False
+
+        for i in Livro.ListaLivro:
+            if i["Autor"] == livro:
+                i["Autor"] = "O alquimista"
+                print("Editado")
+                encontrado = True
+                break
+        if not encontrado:
+                print('Não encontrado')
 
 
 l1 = Livro('vito','amor','romance','2004')
 l1.adicionar()
 l2 = Livro('vivia','biomedica','romance','2006')
 l2.adicionar()
-l2.listar_livros()
+l1.editar('vito')
+l1.listar_livros()
