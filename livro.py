@@ -1,44 +1,17 @@
-from rich import print
-from rich.panel import Panel
-
 class Livro:
-    ListaLivro = []
-
-    def __init__(self, autor, titulo,genero, ano):
-        self.autor = autor
+    def __init__(self, titulo, autor, ano, genero, quant_disponivel = 0, disponivel = False):
         self.titulo = titulo
-        self.genero = genero
+        self.autor = autor
         self.ano = ano
-        
+        self.genero = genero
+        self.quant_disponivel = quant_disponivel
+        self.disponivel = disponivel
 
     def __str__(self):
-        return f"Autor {self.autor}, Titulo {self.titulo} Genero {self.genero} Ano {self.ano}"
-
-    def adicionar(self):
-        Livro.ListaLivro.append({"Autor":self.autor, "Titulo":self.titulo, "Genero":self.genero, "Ano":self.ano})
-        return self.ListaLivro
-
-    def listar_livros(self):
-        livros = [livro for livro in Livro.ListaLivro]
-        print(Panel(str(livros), title= "Livros"))
-
-    def editar(self, livro):
-
-        encontrado = False
-
-        for i in Livro.ListaLivro:
-            if i["Autor"] == livro:
-                i["Autor"] = "O alquimista"
-                print("Editado")
-                encontrado = True
-                break
-        if not encontrado:
-                print('Não encontrado')
+        return f"O livro {self.titulo} escrito por {self.autor}, no ano {self.ano} do genero {self.genero} tem quant {self.quant_disponivel}"
+    
 
 
-l1 = Livro('vito','amor','romance','2004')
-l1.adicionar()
-l2 = Livro('vivia','biomedica','romance','2006')
-l2.adicionar()
-l1.editar('vito')
-l1.listar_livros()
+l1 = Livro('o alquimista','Paulo coelho','2001','fantasia',5)
+print(l1)
+
