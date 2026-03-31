@@ -10,8 +10,5 @@ class Livro:
     def __str__(self):
         return f"O livro {self.titulo} escrito por {self.autor}, no ano {self.ano} do genero {self.genero} tem quant {self.quant_disponivel}"
     
-
-
-l1 = Livro('o alquimista','Paulo coelho','2001','fantasia',5)
-print(l1)
-
+    
+        
