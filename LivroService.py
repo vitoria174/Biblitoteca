@@ -1,33 +1,45 @@
 from livro import Livro
+from rich.panel import Panel
+from rich import print
 
 class LivroService:
-    lista_Livro = []
+
+    ListaLivro = []
 
     @classmethod
     def adicionar(cls, livro):
-        cls.lista_Livro.append(livro)
+        cls.ListaLivro.append(livro)
+        print(f"Criado com sucesso")
 
     @classmethod
-    def imprimir(cls):
-        for indice, informacao in enumerate(cls.lista_Livro):
-            print(f"{indice} - {informacao}")
-
-    @classmethod
-    def editar_livros(cls, indice, novo_titulo = None, novo_autor = None):
+    def editar(cls, indice, novo_titulo, novo_autor):
         try:
-            livro = cls.lista_Livro[indice]
-
+            livro = cls.ListaLivro[indice]
+            
             if novo_titulo:
                 livro.titulo = novo_titulo
 
             if novo_autor:
                 livro.autor = novo_autor
-        
-        except:
-            print("indice invalido")
-    
+
+        except IndexError:
+            print(f'Indice invalido')
+
     @classmethod
-    def total_livros(cls):
-        print(len(cls.lista_Livro))
-
-
+    def listar(cls):
+            if not cls.ListaLivro:
+                print("[red]Lista vazia[/red]")
+                return
+            
+            for indice, valor in enumerate(cls.ListaLivro):
+                print(f"[green]{indice} --- {valor}[/green]")
+        
+    @classmethod
+    def excluir(cls, indice):
+        if indice < 0:
+            print(f"Posição de indice invalida.")
+            return
+        try:
+            cls.ListaLivro.pop(indice)
+        except IndexError:
+            print(f"ERRO: indice invalido")
